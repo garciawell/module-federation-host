@@ -1,13 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import GlobalStyle from "./styles/Globalnject";
 
 
-// import Header from "header/Header";
+const Header = React.lazy(() => import("children/Header"));
+const Footer = React.lazy(() => import("children/Footer"));
 
 const App = () => (
   <div>
-    {/* <Header /> */}
-    <div>HOST APP</div>
+      <React.Suspense fallback="Loading Name">
+        <Header />
+      </React.Suspense>
+    <div>
+      <h1>HOST APP 1</h1>
+    </div>
+    <React.Suspense fallback="Loading Name">
+      <Footer/>
+    </React.Suspense>
+    <GlobalStyle />
   </div>
 );
 
