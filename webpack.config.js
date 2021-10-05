@@ -1,5 +1,10 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
+const path = require('path');
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const LiveReloadPlugin = require("webpack-livereload-plugin");
 
 module.exports = (_, argv) => ({
   output: {
@@ -8,15 +13,21 @@ module.exports = (_, argv) => ({
         ? "http://localhost:3000/"
         : "https://LINK-PRODUCAO",
   },
-
+  entry: { 
+    main: './src/index.js',
+  },
+  mode: isDevelopment ? 'development' : 'production',
   resolve: {
     extensions: [".jsx", ".js", ".json"],
   },
-
   devServer: {
+    hot: false,
+    static: path.join(__dirname, "dist"),
     port: 3000,
+    historyApiFallback: {
+      index: "index.html",
+    },
   },
-
   module: {
     rules: [
       {
@@ -30,11 +41,18 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.jsx?$/,
+        loader: "babel-loader",
+        exclude: /node_modules/,
+        options: {
+          presets: ["@babel/preset-react"],
+        },
+      },
     ],
   },
 
   plugins: [
-
     new ModuleFederationPlugin({
       name: "consumer",
       filename: "remoteEntry.js",
@@ -44,8 +62,12 @@ module.exports = (_, argv) => ({
       exposes: {},
       shared: require("./package.json").dependencies,
     }),
+    new ExternalTemplateRemotesPlugin(),
     new HtmlWebPackPlugin({
       template: "./public/index.html",
     }),
-  ],
+    new LiveReloadPlugin({
+      port: 35729,
+    }),
+  ]
 });

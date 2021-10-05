@@ -4,8 +4,9 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:dev": "webpack --mode development",
-    "start": "webpack-dev-server --open --mode development",
-    "start:live": "webpack-dev-server --open --mode development --liveReload"
+    "start": "webpack-dev-server --open --mode development --hot",
+    "start:live": "webpack-dev-server --open --mode development --live-reload",
+    "start:dev": "webpack serve --mode development"
   },
   "license": "MIT",
   "author": {
@@ -16,13 +17,17 @@
     "@babel/core": "7.15.5",
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-react": "7.14.5",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.1",
     "babel-loader": "8.2.2",
     "css-loader": "^6.3.0",
+    "external-remotes-plugin": "^1.0.0",
     "html-webpack-plugin": "^5.3.2",
+    "react-refresh": "^0.10.0",
     "style-loader": "3.3.0",
     "webpack": "5.56.1",
     "webpack-cli": "4.8.0",
-    "webpack-dev-server": "4.3.1"
+    "webpack-dev-server": "4.3.1",
+    "webpack-livereload-plugin": "^3.0.2"
   },
   "dependencies": {
     "react": "^17.0.2",
