@@ -5,7 +5,7 @@ import GlobalStyle from "./styles/Globalnject";
 
 
 const Header = React.lazy(() => import("children/Header"));
-const Footer = React.lazy(() => import("children/Footer"));
+
 
 const App = () => {
 
@@ -18,9 +18,6 @@ const App = () => {
     <div>
       <h1>HOST 222</h1>
     </div>
-    <React.Suspense fallback="Loading Name">
-      <Footer/>
-    </React.Suspense>
     <LocalComponent />  
     <GlobalStyle />
   </div>
