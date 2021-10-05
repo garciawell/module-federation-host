@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkfederation_host=self.webpackChunkfederation_host||[]).push([[187],{187:(e,n,t)=>{t.r(n);var l=t(407),r=t.n(l),u=t(525),a=function(){return r().createElement("div",null,r().createElement("div",null,"HOST APP"))};t.n(u)().render(r().createElement(a,null),document.getElementById("app"))}}]);
